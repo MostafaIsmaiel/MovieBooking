@@ -1,0 +1,219 @@
+@import url('https://fonts.googleapis.com/css2?family=Lato&display=swap');
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    background-color: #242333;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    height: 100vh;
+    color: white;
+    font-family: 'Lato', sans-serif;
+    margin: 0;
+}
+
+.movie-container {
+    margin: 20px 0;
+}
+
+.movie-container select{
+    background-color: white;
+    border: 0;
+    border-radius: 5px;
+    font-size: 14px;
+    margin-left: 10px;
+    padding: 5px 15px;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    outline: none;
+}
+
+.container {
+    perspective: 1000px;
+    margin-bottom: 30px;
+}
+
+.seat {
+    background-color: #444451;
+    height: 12px;
+    width: 15px;
+    margin: 3px;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+}
+
+.seat.selected {
+    background-color: #6feaf6;
+}
+
+.seat.occupied {
+    background-color: white ;
+}
+
+.seat:nth-of-type(2) {
+    margin-right: 18px;
+}
+
+.seat:nth-last-of-type(2) {
+    margin-left: 18px;
+}
+
+.showcase .seat:not(.occupied):hover {
+    cursor: default;
+    transform: scale(1);
+    
+}
+
+.seat:not(.occupied):hover {
+    cursor: pointer;
+    transform: scale(1.2);
+
+}
+
+.showcase {
+    background-color: rgba(0,0,0,0.1);
+    padding: 5px 10px;
+    border-radius: 5px;
+    color: #777;
+    list-style: none;
+    display: flex;
+}
+
+.showcase li {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 10px;
+}
+
+.showcase li small {
+    margin-left: 2px;
+}
+
+.row {
+    display: flex;
+}
+
+.screen {
+    background-color: white;
+    height: 70px;
+    width: 100%;
+    margin: 15px 0;
+    transform: rotateX(-45deg);
+    box-shadow: 0 3px 20px rgba(255,255,255,0.7);
+    animation: screen 5s 0s alternate ease-in-out infinite;
+}
+
+p.text {
+    margin: 5px 0;
+}
+
+p.text span {
+    color: #6feaf6;
+}
+
+.book {
+    color: white;
+    background-color: rgb(3, 180, 3);
+    font-size: 14px;
+    padding: 10px 20px;
+    cursor: pointer;
+    margin-top: 15px;
+    border: none;
+    border-radius: 5px;
+    outline: none;
+    box-shadow: 0 3px 10px rgba(0, 253, 63, 0.555);
+    transition: all 0.1s ease-in-out;
+}
+
+.book:hover {
+    background-color: rgb(3, 205, 3);
+    box-shadow: 0 3px 10px rgba(0, 253, 63, 0.361);
+}
+
+.overlay{
+    position: absolute;
+    width: 100%;
+    height:100%;
+    top: 0;
+    left: 0;
+    background-color: rgb(9 9 9 / 37%);
+    z-index: 10;
+}
+
+.result{
+    position: absolute;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
+    visibility: hidden;
+    opacity: 0;
+    transition: all 0.1s ease-in-out;
+}
+
+.result .book-result-section {
+    position: absolute;
+    background-color: #0d5f60f0;
+    width: 40%;
+    height: 30%;
+    border-radius: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    z-index: 11;
+}
+
+.result .book-result-section .book-result{
+    color: rgb(255, 255, 255);
+    font-size: 18px;
+    padding: 10px;
+}
+
+.result .book-result-section .book-result span {
+    color: rgb(44, 233, 145);
+    font-weight: 200;
+}
+
+.result .book-result-section #closer {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    font-size: 20px;
+    font-weight: 100;
+    cursor: pointer;
+}
+
+@keyframes screen {
+    0% {
+        background-color: rgb(251, 71, 71);
+        box-shadow: 0 3px 20px rgba(251, 71, 71,0.7);
+    }
+    10% {
+        background-color: rgb(49, 255, 117);
+        box-shadow: 0 3px 20px rgba(49, 255, 117,0.7);
+    }
+    30% {
+        background-color: rgb(255, 255, 49);
+        box-shadow: 0 3px 20px rgba(255, 255, 49,0.7);
+    }
+    60% {
+        background-color: rgb(49, 135, 255);
+        box-shadow: 0 3px 20px rgba(49, 135, 255,0.7);
+    }
+    80% {
+        background-color: rgb(255, 32, 32);
+        box-shadow: 0 3px 20px rgba(255, 32, 32,0.7);
+    }
+    100% {
+        background-color: rgb(255, 32, 218);
+        box-shadow: 0 3px 20px rgba(255, 32, 218,0.7);
+    }
+}
