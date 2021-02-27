@@ -3,7 +3,8 @@ let container = document.querySelector('.container'),
     count = document.getElementById('count'),
     total = document.getElementById('total'),
     movieSelect = document.getElementById('movie'),
-    bookBtn = document.getElementById("book"),
+    bookBtn = document.getElementById('book'),
+    error = document.getElementById('error'),
     resultScreen = document.getElementById("result"),
     bookSeats = document.getElementById("book-seats"),
     bookMovie = document.getElementById("book-movie"),
@@ -15,6 +16,11 @@ let container = document.querySelector('.container'),
 function setMovieData(movieIndex, moviePrice) {
     localStorage.setItem('selectedMovieIndex', movieIndex);
     localStorage.setItem('selectedMoviePrice', moviePrice);
+}
+
+// Show Error
+function showError(message) {
+    error.innerText = message;
 }
 
 // Update total and count
@@ -29,12 +35,8 @@ function updateSelectedCount() {
 
     count.innerText = selectedSeatsCount;
     total.innerText = selectedSeatsCount * ticketPrice;
-    if (selectedSeatsCount == "0") {
-        bookBtn.disabled = true;
-    } else {
-        bookBtn.disabled = false;
-        bookSeats.innerText = selectedSeatsCount;
-    }
+    bookSeats.innerText = selectedSeatsCount;
+
 }
 
 // Refresh selected count
@@ -45,6 +47,8 @@ function refreshSelectedCount() {
 
     const selectedMoviePrice = localStorage.getItem('selectedMoviePrice');
     total.innerText = selectedMoviePrice * selectedSeatsCount;
+    bookSeats.innerText = selectedSeatsCount;
+
 }
 
 // Get data from local storage and populate UI
@@ -102,11 +106,18 @@ container.addEventListener('click', e => {
 bookBtn.addEventListener('click', () => {
     const selectedIndex = movieSelect.selectedIndex;
     const movieName = movieSelect.children[selectedIndex].innerText.split("(")[0];
-    bookMovie.innerText = movieName;
+    if (movieSelect.children[selectedIndex].value == 0) {
+        showError("You should select your movie at first")
+    } else if (count.innerText === "0") {
+        showError("You should select seats at first");
+    } else {
+        bookMovie.innerText = movieName;
+        resultScreen.style.visibility = "visible";
+        resultScreen.style.opacity = "1";
+        document.body.style.overflow = "hidden";
+        error.innerText = "";
+    }
 
-    resultScreen.style.visibility = "visible";
-    resultScreen.style.opacity = "1";
-    document.body.style.overflow = "hidden";
 });
 
 // Result Screen closer
